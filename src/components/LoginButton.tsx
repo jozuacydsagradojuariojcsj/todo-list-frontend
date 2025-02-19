@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 interface LoginProps {
     buttonText: string,

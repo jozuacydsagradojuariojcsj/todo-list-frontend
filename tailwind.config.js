@@ -12,7 +12,11 @@ export default {
             "elevation-3": "0 0 25px rgba(0, 0, 0, 0.12)",
         },
         colors: {
+            "#signin" : "#162D3A",
+            "#socials" : "#F3F9FA",
             "#twitter-blue": "#1DA1F2",
+            "#input-main" : "#F7FBFF",
+            "#input-border": "#D4D7E3",
             // Neutral Colors
             nt: {
                 white: "#FFFFFF",
@@ -52,6 +56,7 @@ export default {
             },
         },
         fontFamily: {
+            cursive: ["Cedarville Cursive", "sans-serif"],
             noto: ["Noto Sans JP", "sans-serif"],
             sans: ["DM Sans", "sans-serif"],
         },

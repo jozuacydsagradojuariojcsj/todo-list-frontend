@@ -1,16 +1,18 @@
-import { HashRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router"
 import LoginPage from "./pages/LoginPage"
+import Dashboard from "./pages/Dashboard"
 
 function App() {
   
 
   return (
     <>
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage/>}/>
+          <Route path="/dashboard" element={<Dashboard/>}/>
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </>
   )
 }

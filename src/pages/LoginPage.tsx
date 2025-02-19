@@ -1,52 +1,62 @@
-import React from "react";
-import image from "../assets/flower_placeholder.jpg";
+
 import LoginInputComponent from "../components/LoginInputComponent";
 import Divider from "../components/Divider";
 import Column from "../components/Column";
 import Row from "../components/Row";
 import Button from "../components/Button";
-import { FaFacebook, FaGoogle } from "react-icons/fa";
+import Text from "../components/Text";
+import Center from "../components/Center";
+import Container from "../components/Container";
+
+const Google = "/assets/Google.svg";
+const Facebook = "/assets/Facebook.svg";
+const LoginArt = "/assets/Login Art.svg"
 
 const LoginPage = () => {
   return (
     <>
-      <Column className="justify-start items-center h-screen w-screen py-5 px-5 border gap-5 border-black  sm:flex-row">
-        <div className="w-11/12 sm:w-72 sm:h-72  border border-black">
+      <Container className="flex flex-col bg-nt-white justify-start items-center h-screen w-screen overflow-y-auto border border-black py-4 px-1 gap-5 
+      sm:flex-row-reverse sm:px-4">
+        <div className="w-11/12 h-44 sm:w-1/2 sm:h-full">
           <img
-            className="rounded-xl justify-center object-cover sm:rounded-none"
-            src={image}
+            className="w-full h-full rounded-xl justify-center object-cover"
+            src={LoginArt}
           />
         </div>
-        <Column className="border border-black flex-1 w-11/12 gap-2">
-            <h1 className="font-noto tracking-wide text-2xl">Welcome Back</h1>
-            <p className="font-noto text-xs tracking-wide">
-                Today is a new day. It's your day. You shape it. <br /> Sign in to
-                start managing your projects.
-            </p>
-            <Column className="w-auto border border-red-600">
-                <p className="font-noto text-xs tracking-wide">Username or Email</p>
-                <LoginInputComponent defaultValue="Username or Email"/>
+        <Column className="flex-1 w-11/12 gap-4 sm:mx-2 md:mx-4 lg:mx-8">
+            <h1 className="font-noto tracking-wide text-2xl md:text-4xl">Welcome Back 👋</h1>
+            <Text className="font-noto tracking-wide" text="Today is a new day. It's your day. You shape it."/>
+            <Text className="font-noto tracking-wide" text="Sign in to start managing your projects"/>
+
+            <Column className="w-auto gap-1">
+                <Text className="font-noto tracking-wide" text="Username or Email"/>
+                <LoginInputComponent className="border-2 border-#input-border bg-#input-main" placeholder="Username or Email"/>
             </Column>
 
-            <Column>
-                <p className="font-noto text-xs tracking-wide">Password</p>
-                <LoginInputComponent defaultValue="Password"/>
+            <Column className="w-auto gap-1">
+                <Text className="font-noto tracking-wide" text="Password"/>
+                <LoginInputComponent className="border-2 border-#input-border bg-#input-main" placeholder="Password"/>
             </Column>
 
-            <a className="font-noto text-sm ml-auto tracking-wide">
+            <a className="font-noto text-xs ml-auto tracking-wide">
                 Forgot Password?
             </a>
 
-            {/* <Button buttonText="Sign In"/> */}
+            <Button className="bg-#signin hover:bg-slate-600 transition w-full h-11gap-2 px-4 py-2" buttonText="Sign in" textClass="text-white"/>
+            
+            <Divider text="Or sign in with" textClassName="text-black"/>
 
-            <Divider text="Or sign in with"/>
-
-            <Row className="justify-center items-center gap-2 w-full border border-red-950">
-                <Button className="flex items-center justify-center w-full h-11 border border-green-700 font-noto text-base rounded-lg" icon={<FaGoogle/>} buttonText="Google"/>
-                <Button className="flex items-center justify-center w-full h-11 border border-green-700 font-noto text-base rounded-lg" icon={<FaFacebook/>} buttonText="Facebook"/>
+            <Row className="justify-center items-center gap-2 w-full 
+             sm:flex-col">
+                <Button className="bg-#socials hover:bg-slate-300 w-full h-11 gap-2 px-4 py-2" icon={Google} buttonText="Google"/>
+                <Button className="bg-#socials hover:bg-slate-300 w-full h-11 gap-2 px-4 py-2"  icon={Facebook} buttonText="Facebook"/>
+            </Row>
+            <Row className="justify-center items-center gap-1">
+              <Center className="font-noto text-sm">Don't you have an account? </Center>
+              <a className="font-noto text-sm">Sign up</a>
             </Row>
         </Column> 
-      </Column>
+      </Container>
     </>
   );
 };
