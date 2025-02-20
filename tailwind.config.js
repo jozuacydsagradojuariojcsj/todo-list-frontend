@@ -59,6 +59,7 @@ export default {
             cursive: ["Cedarville Cursive", "sans-serif"],
             noto: ["Noto Sans JP", "sans-serif"],
             sans: ["DM Sans", "sans-serif"],
+            roboto: ["Roboto", "sans-serif"]
         },
         fontSize: {
             h1: ["48px", { lineHeight: "50px", fontWeight: "500" }],

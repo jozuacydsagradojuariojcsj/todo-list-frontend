@@ -6,7 +6,7 @@ interface TextProps{
 }
 const Text = ({text, className}:TextProps) => {
   return (
-    <p className={`text-xs${className}`}>{text}</p>
+    <p className={`${className}`}>{text}</p>
   )
 }
 
