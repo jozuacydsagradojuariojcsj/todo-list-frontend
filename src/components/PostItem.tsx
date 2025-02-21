@@ -15,14 +15,14 @@ const PostItem = ({ name, picture, caption, profile,key }: PostItemProps) => {
     <div key={key} className="flex flex-col justify-center">
       <div className="flex flex-row-reverse justify-between p-2">
         <Ellipsis/>
-        <div className="flex flex-row-reverse gap-2 font-noto font-semibold">
+        <div className="flex flex-row-reverse gap-2  text-xs md:text-[10px] lg:text-xs xl:text-sm font-noto font-semibold">
           {name}
 
           {profile && typeof profile === "string" ? (
             <img
               src={profile}
               alt="icon"
-              className={`rounded-full object-cover w-8 h-8 ${profile}`}
+              className={`rounded-full object-cover size-7 md:size-8 lg:size-9 xl:size-10 ${profile}`}
             />
           ) : (
             profile
@@ -33,7 +33,7 @@ const PostItem = ({ name, picture, caption, profile,key }: PostItemProps) => {
         <img
           src={picture}
           alt="icon"
-          className={`object-cover w-screen h-96 ${picture}`}
+          className={`object-cover w-screen h-[350px] md:h-[400px]`}
         />
       ) : (
         picture
@@ -47,7 +47,7 @@ const PostItem = ({ name, picture, caption, profile,key }: PostItemProps) => {
         </div>
         <Bookmark />
       </div>
-      <div className="px-3">
+      <div className="text-xs md:text-[10px] lg:text-xs xl:text-sm font-roboto px-3">
         {caption}
       </div>
       

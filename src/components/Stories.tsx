@@ -5,13 +5,13 @@ interface StoriesProps {
 }
 const Stories = ({ className, src, name }: StoriesProps) => {
   return (
-    <div className="flex flex-col items-center justify-center min-w-14">
-      <div className="relative p-[2px] rounded-full border-2 border-transparent bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500">
+    <div className="flex flex-col items-center justify-center min-w-16">
+      <div className="relative p-[2px] rounded-full border-1 border-transparent bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500">
         {src && typeof src === "string" ? (
           <img
             src={src}
             alt="icon"
-            className={`rounded-full object-cover w-12 h-12 ${className}`}
+            className={`rounded-full object-cover size-12 md:size-13 lg:size-14 xl:size-15 ${className}`}
           />
         ) : (
           src
