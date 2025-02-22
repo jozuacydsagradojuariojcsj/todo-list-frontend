@@ -12,10 +12,10 @@ interface PostItemProps {
 
 const PostItem = ({ name, picture, caption, profile,key }: PostItemProps) => {
   return (
-    <div key={key} className="flex flex-col justify-center">
+    <div key={key} className="flex flex-col justify-center w-[468px]">
       <div className="flex flex-row-reverse justify-between p-2">
         <Ellipsis/>
-        <div className="flex flex-row-reverse gap-2  text-xs md:text-[10px] lg:text-xs xl:text-sm font-noto font-semibold">
+        <div className="flex flex-row-reverse gap-2 text-xs md:text-[10px] lg:text-xs xl:text-sm font-noto font-semibold">
           {name}
 
           {profile && typeof profile === "string" ? (

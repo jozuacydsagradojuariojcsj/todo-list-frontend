@@ -11,7 +11,7 @@ const Stories = ({ className, src, name }: StoriesProps) => {
           <img
             src={src}
             alt="icon"
-            className={`rounded-full object-cover size-12 md:size-13 lg:size-14 xl:size-15 ${className}`}
+            className={`rounded-full object-cover size-[56px] ${className}`}
           />
         ) : (
           src

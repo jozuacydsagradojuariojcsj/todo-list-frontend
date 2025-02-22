@@ -53,7 +53,7 @@ const Dashboard = () => {
   return (
     <>
       <div className="flex flex-col h-screen md:flex-row-reverse">
-        <div className="hidden md:flex md:flex-col md:w-48 lg:w-52 xl:w-96 md:py-5 md:px-3 gap-y-2">
+        <div className="hidden lg:flex lg:flex-col md:w-48 lg:w-52 xl:w-96 md:py-5 md:px-3 gap-y-2">
           <h3 className="text-gray-700 font-semibold text-lg mb-3">
             Suggested for You
           </h3>
@@ -66,9 +66,9 @@ const Dashboard = () => {
           ))}
         </div>
 
-        <div className="flex flex-col flex-1 overflow-y-scroll no-scrollbar md:pl-20 lg:pl-30 xl:pl-40">
+        <div className="flex flex-col flex-1 overflow-y-scroll no-scrollbar md:pl-6 md:pt-4 lg:pl-30 xl:pl-40">
           <Header />
-          <div className="flex flex-row overflow-x-auto w-full min-h-24 justify-start items-center p-2 gap-2 no-scrollbar px-3">
+          <div className="flex flex-row overflow-x-auto w-full min-h-[100px] md:max-w-[630px] pl-[5px] justify-start items-center p-2 gap-4 no-scrollbar px-3">
             {mockData.map((mock) => (
               <Stories
                 className="flex flex-nowrap gap-y-5"
@@ -78,7 +78,7 @@ const Dashboard = () => {
             ))}
           </div>
 
-          <div className="flex flex-col gap-y-16 py-2 md:px-10">
+          <div className="flex flex-col gap-y-16 py-2 md:pl-20">
             {mockData.map((mock) => (
               <PostItem
                 key={mock.id}

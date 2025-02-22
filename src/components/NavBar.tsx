@@ -1,5 +1,6 @@
 import { Heart, House, Menu, PlusSquare, Search } from "lucide-react";
 import { useState } from "react";
+import Divider from "../components/Divider";
 import Text from "./Text";
 interface NavbarProps {
   icon?: React.ReactNode | string;
@@ -20,10 +21,9 @@ const NavBar = ({ icon }: NavbarProps) => {
 
   return (
     <>
-      
-
-      <div className="flex flex-row items-center justify-evenly position-sticky px-5 min-h-14 md:flex-col md:items-start md:justify-start md:gap-y-5 md:py-20 md:w-34 lg:w-60">
-        <Text className="hidden md:flex pl-3 font-cursive text-4xl" text="Instagram"/>
+      <div className="inline-block w-0.5 self-stretch bg-neutral-100 dark:bg-white/10" />
+      <div className="flex flex-row items-center justify-evenly position-sticky px-3 min-h-14 md:flex-col md:items-start md:justify-start md:gap-y-5 md:py-20 md:w-34 lg:w-60">
+        {/* <Text className="hidden md:flex pl-3 font-cursive text-4xl" text="Instagram"/> */}
         {navItems.map((item) => (
           <button
             key={item.id}
@@ -35,13 +35,13 @@ const NavBar = ({ icon }: NavbarProps) => {
             }`}
           >
             <item.icon.type
-              className={`w-7 h-7 md:w-4 md:h-4 lg:w-6 lg:h-6 ${
-                activeItem === item.id ? "text-black stroke-2 stroke-black" : "text-gray-500"
+              className={`size-[24px] ${
+                activeItem === item.id
+                  ? "text-black stroke-2 stroke-black"
+                  : "text-gray-500"
               }`}
             />
-            <span className="font-roboto hidden md:flex md:text-[10px] lg:text-sm">
-              {item.text}
-            </span>
+            <span className="font-roboto hidden lg:text-sm">{item.text}</span>
           </button>
 
           // <div key={index} className="flex items-center gap-2">
@@ -55,17 +55,21 @@ const NavBar = ({ icon }: NavbarProps) => {
             className={`flex items-center justify-center font-noto text-base rounded-lg`}
           >
             {icon && typeof icon === "string" ? (
-              <img src={icon} alt="icon" className="rounded-full w-7 h-7 md:w-4 md:h-4 lg:w-6 lg:h-6 " />
+              <img src={icon} alt="icon" className="rounded-full size-[24px]" />
             ) : (
               icon
             )}
           </button>
-          <span className="font-roboto hidden md:flex md:text-[10px] lg:text-sm w-7 h-7 md:w-4 md:h-4 lg:w-6 lg:h-6">Profile</span>
+          <span className="font-roboto hidden md:text-[10px] lg:text-sm lg:flex">
+            Profile
+          </span>
         </div>
 
         <div className="hidden md:flex item-center gap-2 px-3 py-2">
-          <Menu className="w-7 h-7 md:w-4 md:h-4 lg:w-7 lg:h-7" />
-          <span className="font-roboto hidden md:flex md:text-[10px] lg:text-sm">More</span>
+          <Menu className="size-[24px]" />
+          <span className="font-roboto hidden md:text-[10px] lg:flex lg:text-sm">
+            More
+          </span>
         </div>
       </div>
     </>
