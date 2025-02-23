@@ -1,7 +1,5 @@
 import { Heart, House, Menu, PlusSquare, Search } from "lucide-react";
 import { useState } from "react";
-import Divider from "../components/Divider";
-import Text from "./Text";
 interface NavbarProps {
   icon?: React.ReactNode | string;
 }
@@ -21,8 +19,8 @@ const NavBar = ({ icon }: NavbarProps) => {
 
   return (
     <>
-      <div className="inline-block w-0.5 self-stretch bg-neutral-100 dark:bg-white/10" />
-      <div className="flex flex-row items-center justify-evenly position-sticky px-3 min-h-14 md:flex-col md:items-start md:justify-start md:gap-y-5 md:py-20 md:w-34 lg:w-60">
+      <div className="hidden md:inline-block w-0.5 self-stretch bg-neutral-100 dark:bg-white/10" />
+      <div className="flex flex-row items-center justify-evenly position-sticky px-3 min-h-[48px] min-w-[50px] md:min-h-screen xl:min-w-[220px] 2xl:min-w-[315px] md:flex-col md:items-start md:justify-start md:gap-y-5 md:py-20">
         {/* <Text className="hidden md:flex pl-3 font-cursive text-4xl" text="Instagram"/> */}
         {navItems.map((item) => (
           <button
@@ -41,7 +39,9 @@ const NavBar = ({ icon }: NavbarProps) => {
                   : "text-gray-500"
               }`}
             />
-            <span className="font-roboto hidden lg:text-sm">{item.text}</span>
+            <span className="font-roboto hidden xl:flex xl:text-sm ">
+              {item.text}
+            </span>
           </button>
 
           // <div key={index} className="flex items-center gap-2">
@@ -60,16 +60,12 @@ const NavBar = ({ icon }: NavbarProps) => {
               icon
             )}
           </button>
-          <span className="font-roboto hidden md:text-[10px] lg:text-sm lg:flex">
-            Profile
-          </span>
+          <span className="font-roboto hidden xl:text-sm xl:flex">Profile</span>
         </div>
 
         <div className="hidden md:flex item-center gap-2 px-3 py-2">
           <Menu className="size-[24px]" />
-          <span className="font-roboto hidden md:text-[10px] lg:flex lg:text-sm">
-            More
-          </span>
+          <span className="font-roboto hidden xl:flex xl:text-sm">More</span>
         </div>
       </div>
     </>

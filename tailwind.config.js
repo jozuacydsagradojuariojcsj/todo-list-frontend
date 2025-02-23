@@ -81,6 +81,10 @@ export default {
             "caption-str": ["12px", { lineHeight: "auto", fontWeight: "700" }],
             "caption-all-caps": ["9px", { lineHeight: "auto", fontWeight: "700", letterSpacing: "0.12em", textTransform: "uppercase" }],
         },
+        screens: {
+            "less-sm" : "470px",
+            "mid-lg" : "1153px"
+        },
     },
   },
   plugins: [],

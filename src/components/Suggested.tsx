@@ -8,7 +8,7 @@ interface SuggestedProps {
 const Suggested = ({ suggestedName, suggestedProfile }: SuggestedProps) => {
   return (
     <>
-      <div className="flex flex-col justify-center py-[5px]">
+      <div className="flex flex-col justify-center py-[5px] max-w-[315px]">
         <div className="flex flex-row justify-between">
           <div className="flex flex-row items-center gap-x-2">
             {suggestedProfile && typeof suggestedProfile === "string" ? (
