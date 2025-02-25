@@ -2,12 +2,60 @@ import LoginInputComponent from "../components/LoginInputComponent";
 import Divider from "../components/Divider";
 import Button from "../components/Button";
 import Text from "../components/Text";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { useLoginUserMutation } from "../services/userApi";
 
 const Google = "/assets/Google.svg";
 const Facebook = "/assets/Facebook.svg";
 const LoginArt = "/assets/Login Art.svg";
 
 const LoginPage = () => {
+  let navigate = useNavigate();
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loginUser, {data, error: loginError, isLoading: loginLoading}] = useLoginUserMutation();
+
+
+  const handleLogin = async() => {
+    try{
+      const response = await loginUser({
+        identifier: identifier,
+        password: password,
+      }).unwrap();
+      console.log("Login Successful:", response);
+
+      if(response.message){
+        navigate("/dashboard");
+        console.log("ASDASDASD");
+      }
+
+      if(response.error){
+        console.log("wazzap")
+      }
+
+    }catch(err){
+      
+      if (err?.status === 404) {
+        console.log("User not found. Please check your credentials.");
+      } 
+      // Check if it's a 400 Bad Request error (missing fields)
+      else if (err?.status === 400) {
+        console.log("Missing username or password.");
+      } 
+      // Handle Internal Server Error
+      else if (err?.status === 500) {
+        console.error("Internal Server Error:", err);
+      } 
+      // Handle any other unexpected errors
+      else {
+        console.error("Login Failed:", err);
+      }
+    }
+
+  };
+
   return (
     <>
       <div
@@ -39,6 +87,9 @@ const LoginPage = () => {
               text="Username or Email"
             />
             <LoginInputComponent
+            type="email"
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
               className="border-2 border-#input-border bg-#input-main"
               placeholder="Username or Email"
             />
@@ -47,6 +98,9 @@ const LoginPage = () => {
           <div className="flex flex-col w-auto gap-1">
             <Text className="font-noto tracking-wide" text="Password" />
             <LoginInputComponent
+            type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
               className="border-2 border-#input-border bg-#input-main"
               placeholder="Password"
             />
@@ -57,7 +111,9 @@ const LoginPage = () => {
           </a>
 
           <Button
-            className="bg-#signin hover:bg-slate-600 transition w-full h-11gap-2 px-4 py-2"
+          loading={loginLoading}
+            onClick={handleLogin}
+            className="bg-#signin hover:bg-slate-600 transition w-full h-11 gap-2 px-4 py-2"
             buttonText="Sign in"
             textClass="text-white"
           />
@@ -69,11 +125,13 @@ const LoginPage = () => {
              sm:flex-col"
           >
             <Button
+              onClick={() => console.log("Google")}
               className="bg-#socials hover:bg-slate-300 w-full h-11 gap-2 px-4 py-2"
               icon={Google}
-              buttonText="Google" 
+              buttonText="Google"
             />
             <Button
+              onClick={() => console.log("Facebook")}
               className="bg-#socials hover:bg-slate-300 w-full h-11 gap-2 px-4 py-2"
               icon={Facebook}
               buttonText="Facebook"
