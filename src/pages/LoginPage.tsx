@@ -2,7 +2,7 @@ import LoginInputComponent from "../components/LoginInputComponent";
 import Divider from "../components/Divider";
 import Button from "../components/Button";
 import Text from "../components/Text";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useLoginUserMutation } from "../services/userApi";
 
@@ -11,50 +11,62 @@ const Facebook = "/assets/Facebook.svg";
 const LoginArt = "/assets/Login Art.svg";
 
 const LoginPage = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
+  const [userData, setUserData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    roles: "",
+  });
 
-  const [loginUser, {data, error: loginError, isLoading: loginLoading}] = useLoginUserMutation();
+  const [loginUser, { isLoading: loginLoading }] = useLoginUserMutation();
 
-
-  const handleLogin = async() => {
-    try{
+  const handleLogin = async () => {
+    try {
       const response = await loginUser({
         identifier: identifier,
         password: password,
       }).unwrap();
       console.log("Login Successful:", response);
 
-      if(response.message){
-        navigate("/dashboard");
-        console.log("ASDASDASD");
+      if (response.user) {
+        const user = response.user;
+        console.log("User", user);
+        setUserData({
+          username: user.username,
+          email: user.email,
+          password: user.password,
+          roles: user.roles,
+        });
       }
 
-      if(response.error){
-        console.log("wazzap")
+      if (response.error) {
+        console.log("wazzap");
       }
-
-    }catch(err){
-      
-      if (err?.status === 404) {
-        console.log("User not found. Please check your credentials.");
-      } 
-      // Check if it's a 400 Bad Request error (missing fields)
-      else if (err?.status === 400) {
-        console.log("Missing username or password.");
-      } 
-      // Handle Internal Server Error
-      else if (err?.status === 500) {
-        console.error("Internal Server Error:", err);
-      } 
-      // Handle any other unexpected errors
-      else {
-        console.error("Login Failed:", err);
+    } catch (err: unknown) {
+      if (typeof err === "object" && err !== null && "status" in err) {
+        const errorStatus = (err as { status?: number }).status;
+        if (errorStatus === 404) {
+          console.log("User not found. Please check your credentials.");
+        } else if (errorStatus === 400) {
+          console.log("Missing username or password.");
+        } else {
+          console.error("Login Failed:", err);
+        }
+      } else {
+        console.error("An unknown error occurred:", err);
       }
     }
-
   };
+
+  useEffect(() => {
+    console.log("Updated userData:", userData);
+    if (userData.username) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [userData, navigate]);
 
   return (
     <>
@@ -87,7 +99,7 @@ const LoginPage = () => {
               text="Username or Email"
             />
             <LoginInputComponent
-            type="email"
+              type="email"
               value={identifier}
               onChange={(e) => setIdentifier(e.target.value)}
               className="border-2 border-#input-border bg-#input-main"
@@ -98,7 +110,7 @@ const LoginPage = () => {
           <div className="flex flex-col w-auto gap-1">
             <Text className="font-noto tracking-wide" text="Password" />
             <LoginInputComponent
-            type="password"
+              type="password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               className="border-2 border-#input-border bg-#input-main"
@@ -111,7 +123,7 @@ const LoginPage = () => {
           </a>
 
           <Button
-          loading={loginLoading}
+            loading={loginLoading}
             onClick={handleLogin}
             className="bg-#signin hover:bg-slate-600 transition w-full h-11 gap-2 px-4 py-2"
             buttonText="Sign in"
