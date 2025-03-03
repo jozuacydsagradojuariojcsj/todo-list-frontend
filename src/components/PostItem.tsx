@@ -4,13 +4,16 @@ import { Bookmark, Ellipsis, Heart, MessageCircle, Share } from "lucide-react";
 
 interface PostItemProps {
   name: string;
-  picture: string;
+  picture: string[] | string;
   caption: string;
   profile: React.ReactNode | string;
   key: number;
 }
 
 const PostItem = ({ name, picture, caption, profile,key }: PostItemProps) => {
+
+  const images = Array.isArray(picture) ? picture[0] : picture;
+
   return (
     <div key={key} className="flex flex-col justify-center w-screen less-sm:max-w-[468px] sm:w-[470px]">
       <div className="flex flex-row-reverse justify-between p-2">
@@ -19,24 +22,36 @@ const PostItem = ({ name, picture, caption, profile,key }: PostItemProps) => {
           {name}
 
           {profile && typeof profile === "string" ? (
-            <img
-              src={profile}
-              alt="icon"
-              className={`rounded-full object-cover size-[32px] ${profile}`}
-            />
+            <div data-carousel="slide ">
+              <img
+                src={profile}
+                alt="icon"
+                className={`rounded-full object-cover size-[32px] ${profile}`}
+              />
+            </div>
+
           ) : (
             profile
           )}
         </div>
       </div>
-      {picture && typeof picture === "string" ? (
-        <img
-          src={picture}
-          alt="icon"
-          className={`object-cover w-screen h-[468.75px] sm:w-[468px] sm:h-[585px]`}
-        />
-      ) : (
-        picture
+
+      {images.length === 1 ? (
+          <img
+            src={images}
+            alt="icon"
+            className={`object-cover w-screen h-[468.75px] sm:w-[468px] sm:h-[585px]`}
+          />
+        
+        
+      ):(
+        <div data-carousel="slide">
+          <img
+            src={images}
+            alt="icon"
+            className={`object-cover w-screen h-[468.75px] sm:w-[468px] sm:h-[585px]`}
+          />
+        </div>
       )}
 
       <div className="flex flex-row justify-between py-2 px-3">

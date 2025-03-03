@@ -3,6 +3,7 @@ import PostItem from "../components/PostItem";
 import Stories from "../components/Stories";
 import Header from "../components/Header";
 import Suggested from "../components/Suggested";
+import { useGetPostsQuery } from "../services/postApi";
 
 const StoryImagePlaceholder = "/assets/Login Art.svg";
 const ProfilePlaceholder = "/assets/profile.webp";
@@ -44,6 +45,8 @@ const mockSuggested = suggestedNames.map((name, index) => ({
 }));
 
 const Dashboard = () => {
+  const { data } = useGetPostsQuery();
+
   return (
     <>
       <div className="flex flex-col h-screen md:flex-row-reverse">
@@ -52,11 +55,11 @@ const Dashboard = () => {
             <h3 className="text-gray-700 font-semibold text-lg mb-3">
               Suggested for You
             </h3>
-            {mockSuggested.map((mock) => (
+            {mockSuggested.map((post) => (
               <Suggested
-                key={mock.id}
-                suggestedName={mock.name}
-                suggestedProfile={mock.profile}
+                key={post.id}
+                suggestedName={post.name}
+                suggestedProfile={post.profile}
               />
             ))}
           </div>
@@ -74,15 +77,32 @@ const Dashboard = () => {
             </div>
 
             <div className="flex flex-col items-center gap-y-16 py-2">
-              {mockData.map((mock) => (
-                <PostItem
-                  key={mock.id}
-                  profile={mock.profile}
-                  caption="Hello World"
-                  picture={mock.postImage}
-                  name={mock.name}
-                />
-              ))}
+              {data?.map((post) => {
+                let images: string[] = [];
+
+                try {
+                  const parsed = JSON.parse(post.file_path);
+                  if (Array.isArray(parsed)) {
+                    images = parsed.map((path: string) => 
+                      `http://localhost:3000/${path.replace(/\\/g, "/")}`
+                    );
+                  } else {
+                    console.error("Parsed file_path is not an array:", parsed);
+                  }
+                } catch (e) {
+                  console.error("Error parsing image", e);
+                }
+
+                return (
+                  <PostItem
+                    key={post.postid}
+                    profile={ProfilePlaceholder}
+                    caption={post.caption}
+                    picture={images}
+                    name={post.username}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
