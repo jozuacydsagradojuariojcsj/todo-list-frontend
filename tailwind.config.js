@@ -1,8 +1,11 @@
 /** @type {import('tailwindcss').Config} */
+import plugins from "daisyui";
+
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/flyonui/dist/js/*.js",
   ],
   theme: {
       extend: {
@@ -87,6 +90,11 @@ export default {
         },
     },
   },
-  plugins: [],
+  plugins: [
+    require("daisyui"),
+  ], 
+  daisyui: {
+    themes: []
+  }
 }
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { Bookmark, Ellipsis, Heart, MessageCircle, Share } from "lucide-react";
 
-
 interface PostItemProps {
   name: string;
   picture: string[] | string;
@@ -10,14 +9,18 @@ interface PostItemProps {
   key: number;
 }
 
-const PostItem = ({ name, picture, caption, profile,key }: PostItemProps) => {
+const PostItem = ({ name, picture, caption, profile, key }: PostItemProps) => {
+  console.log(picture.length);
 
-  const images = Array.isArray(picture) ? picture[0] : picture;
+  const firstImage = Array.isArray(picture) ? picture[0] : picture;
 
   return (
-    <div key={key} className="flex flex-col justify-center w-screen less-sm:max-w-[468px] sm:w-[470px]">
+    <div
+      key={key}
+      className="flex flex-col justify-center w-screen less-sm:max-w-[468px] sm:w-[470px]"
+    >
       <div className="flex flex-row-reverse justify-between p-2">
-        <Ellipsis/>
+        <Ellipsis />
         <div className="flex flex-row-reverse gap-2 text-xs md:text-[10px] lg:text-xs xl:text-sm font-noto font-semibold">
           {name}
 
@@ -29,31 +32,31 @@ const PostItem = ({ name, picture, caption, profile,key }: PostItemProps) => {
                 className={`rounded-full object-cover size-[32px] ${profile}`}
               />
             </div>
-
           ) : (
             profile
           )}
         </div>
       </div>
-
-      {images.length === 1 ? (
-          <img
-            src={images}
-            alt="icon"
-            className={`object-cover w-screen h-[468.75px] sm:w-[468px] sm:h-[585px]`}
-          />
-        
-        
-      ):(
-        <div data-carousel="slide">
-          <img
-            src={images}
-            alt="icon"
-            className={`object-cover w-screen h-[468.75px] sm:w-[468px] sm:h-[585px]`}
-          />
+      {Array.isArray(picture) && picture.length > 1 ? (
+        <div className="carousel w-full">
+          {picture.map((img, index) => (
+            <div id={index} className="carousel-item relative w-full bg-black">
+              <img
+                key={index}
+                src={img}
+                alt="icon"
+                className={`object-contain w-screen h-[468.75px] sm:w-[468px] sm:h-[585px]`}
+              />
+            </div>
+          ))}
         </div>
+      ) : (
+        <img
+          src={firstImage}
+          alt="icon"
+          className={`object-cover w-screen h-[468.75px] sm:w-[468px] sm:h-[585px]`}
+        />
       )}
-
       <div className="flex flex-row justify-between py-2 px-3">
         <div className="flex flex-row gap-3">
           <Heart className="" />
@@ -65,8 +68,6 @@ const PostItem = ({ name, picture, caption, profile,key }: PostItemProps) => {
       <div className="text-xs md:text-[10px] lg:text-xs xl:text-sm font-roboto px-3">
         {caption}
       </div>
-      
-      
     </div>
   );
 };

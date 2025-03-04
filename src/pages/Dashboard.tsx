@@ -78,21 +78,26 @@ const Dashboard = () => {
 
             <div className="flex flex-col items-center gap-y-16 py-2">
               {data?.map((post) => {
-                let images: string[] = [];
 
-                try {
-                  const parsed = JSON.parse(post.file_path);
-                  if (Array.isArray(parsed)) {
-                    images = parsed.map((path: string) => 
-                      `http://localhost:3000/${path.replace(/\\/g, "/")}`
-                    );
-                  } else {
-                    console.error("Parsed file_path is not an array:", parsed);
+                console.log(typeof post.file_path)
+                const images: string[] = (() => {
+                  try {
+                    // Parse only if it's a string
+                    const parsed = typeof post.file_path === "string" ? JSON.parse(post.file_path) : post.file_path;
+                    
+                    // Ensure it's an array
+                    if (Array.isArray(parsed)) {
+                      return parsed.map((path: string) => `http://localhost:3000/${path.replace(/\\/g, "/")}`);
+                    } else {
+                      console.error("Parsed file_path is not an array:", parsed);
+                      return [];
+                    }
+                  } catch (error) {
+                    console.error("Error parsing file_path:", error);
+                    return [];
                   }
-                } catch (e) {
-                  console.error("Error parsing image", e);
-                }
-
+                })();
+                
                 return (
                   <PostItem
                     key={post.postid}
