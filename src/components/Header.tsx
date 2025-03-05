@@ -14,11 +14,13 @@ const Header = () => {
         </div>
           <div className="flex flex-row flex-shrink-0 gap-4">
             <Button
+              onClick={() => console.log("I am clicked")}
               className=" h-auto w-auto" 
               iconClassName="w-7 h-7"
               icon={<Heart/>}
             />
             <Button
+              onClick={() => console.log("Wazzap")}
               className="h-auto w-auto"
               icon={<MessageCircle/>}
               iconClassName=" h-6 w-7"

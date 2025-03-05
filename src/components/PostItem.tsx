@@ -40,7 +40,7 @@ const PostItem = ({ name, picture, caption, profile, key }: PostItemProps) => {
       {Array.isArray(picture) && picture.length > 1 ? (
         <div className="carousel w-full">
           {picture.map((img, index) => (
-            <div id={index} className="carousel-item relative w-full bg-black">
+            <div className="carousel-item relative w-full bg-black">
               <img
                 key={index}
                 src={img}
