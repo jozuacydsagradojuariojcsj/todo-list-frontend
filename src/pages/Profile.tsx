@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PostTab from "../components/tabComponents/PostTab";
-import { Grid,UserSquare2, Videotape } from "lucide-react";
+import { Grid,UserPlus2,UserSquare2, Videotape } from "lucide-react";
+import Button from "../components/Button";
 
 const tabs = [
     { id: "home", label: <Grid/> , content: <PostTab/> },
@@ -32,9 +33,20 @@ const Profile = () => {
       </div>
       threads
       <div className="flex flex-row justify-between">
-        <div>edit profile</div>
-        <div>share profile</div>
-        <div>add</div>
+        <Button
+        onClick={() => console.log("Button")}
+        buttonText="Edit Profile"
+        />
+        <Button
+        onClick={() => console.log("Button")}
+        buttonText="Share Profile"
+        textClass="text-xs"
+        className="border border-yellow-300 w-auto"
+        />
+        <Button
+        onClick={() => console.log("Button")}
+        icon=<UserPlus2/>
+        />
       </div>
       <div className="flex flex-col">
 

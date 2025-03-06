@@ -6,9 +6,6 @@ const PostTab = () => {
         <div className='border border-red-600 size-[100px]'>01</div>
         <div className='border border-red-600 size-[100px]'>01</div>
         <div className='border border-red-600 size-[100px]'>01</div>
-      
-
-
     </div>
   )
 }
