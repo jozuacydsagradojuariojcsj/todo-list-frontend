@@ -5,6 +5,10 @@ import Header from "../components/Header";
 import Suggested from "../components/Suggested";
 import { useGetPostsQuery } from "../services/postApi";
 import { useEffect } from "react";
+import io from "socket.io-client";
+
+const socket = io.connect("http://localhost:3001");
+
 
 const StoryImagePlaceholder = "/assets/Login Art.svg";
 const ProfilePlaceholder = "/assets/profile.webp";
@@ -50,6 +54,10 @@ const Dashboard = () => {
 
   useEffect(() => {
     console.log("✅ Dashboard component mounted");
+    socket.emit("newStory",{message:"HEllo World"});
+    socket.on("receive_message",(data:{message:string}) => {
+      alert(data.message)
+    })
   }, []);
 
   return (
