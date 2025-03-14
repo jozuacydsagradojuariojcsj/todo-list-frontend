@@ -1,4 +1,4 @@
-import { Heart, House, MenuIcon, PlusSquare, Search } from "lucide-react";
+import { Heart, House, MenuIcon, MessageCircle, PlusSquare, Search } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 // interface NavbarProps {
@@ -11,6 +11,7 @@ const navItems = [
   { id: "create", icon: <PlusSquare className="size-7" />, text: "Create", path:"create" },
   { id: "notifications", icon: <Heart className="size-7" />,text: "Notifications", path:"notification"},
   { id: "profile", icon: "/assets/profile.webp", text:"Profile", path:"profile"},
+  { id: "message", icon: <MessageCircle/>, text:"Message", path:"message"} ,
   { id: "more", icon: <MenuIcon className="size-7"/>, text: "More", path:"more"}
 ];
 const NavBar = () => {
@@ -27,7 +28,7 @@ const NavBar = () => {
             key={item.id}
             onClick={() => {
               setActiveitem(item.id)
-              navigate(item.path)
+              navigate(item.path,{replace:true})
             }}
             className={`flex items-center gap-2 px-3 py-2 rounded-md transition-all ${
               activeItem === item.id

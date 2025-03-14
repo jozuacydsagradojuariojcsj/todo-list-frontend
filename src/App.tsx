@@ -3,6 +3,7 @@ import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
 import Layout from "./Layout";
 import Profile from "./pages/Profile";
+import Messages from "./pages/Messages";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="profile" element={<Profile/>} />
           </Route>
+          <Route path="/message" element={<Messages/>}/>
         </Routes>
       </BrowserRouter>
     </>
