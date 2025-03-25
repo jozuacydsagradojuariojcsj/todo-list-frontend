@@ -5,6 +5,7 @@ import Text from "../components/Text";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useLoginUserMutation } from "../services/userApi";
+import Cookies from "js-cookie";
 
 const Google = "/assets/Google.svg";
 const Facebook = "/assets/Facebook.svg";
@@ -34,12 +35,15 @@ const LoginPage = () => {
       if (response.user) {
         const user = response.user;
         console.log("User", user);
+        Cookies.set("userInfo",JSON.stringify(user))
         setUserData({
           username: user.username,
           email: user.email,
           password: user.password,
           roles: user.roles,
         });
+        const userCookie = await Cookies.get("userInfo");
+        console.log(userCookie)
       }
 
       if (response.error) {

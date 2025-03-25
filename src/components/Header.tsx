@@ -23,7 +23,7 @@ const Header = () => {
               onClick={() => console.log("Wazzap")}
               className="h-auto w-auto"
               icon={<MessageCircle/>}
-              iconClassName=" h-6 w-7"
+              iconClassName="h-6 w-7"
             />
           </div>
         </div>

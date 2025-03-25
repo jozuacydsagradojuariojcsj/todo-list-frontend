@@ -3,7 +3,7 @@ import { Bookmark, Ellipsis, Heart, MessageCircle, Share } from "lucide-react";
 
 interface PostItemProps {
   name: string;
-  picture: string[] | string;
+  picture: string[];
   caption: string;
   profile: React.ReactNode | string;
   key: number;
@@ -12,7 +12,7 @@ interface PostItemProps {
 const PostItem = ({ name, picture, caption, profile, key }: PostItemProps) => {
   console.log(picture.length);
 
-  const firstImage = Array.isArray(picture) ? picture[0] : picture;
+  const firstImage = picture[0];
 
   return (
     <div
@@ -37,7 +37,7 @@ const PostItem = ({ name, picture, caption, profile, key }: PostItemProps) => {
           )}
         </div>
       </div>
-      {Array.isArray(picture) && picture.length > 1 ? (
+      {picture.length > 1 ? (
         <div className="carousel w-full">
           {picture.map((img, index) => (
             <div className="carousel-item relative w-full bg-black">
