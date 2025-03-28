@@ -5,6 +5,8 @@ import Text from "../components/Text";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useLoginUserMutation } from "../services/userApi";
+import { RootState } from "../store";
+import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
 
 const Google = "/assets/Google.svg";
@@ -21,6 +23,7 @@ const LoginPage = () => {
     password: "",
     roles: "",
   });
+  const user2 = useSelector((state: RootState) => state.user);
 
   const [loginUser, { isLoading: loginLoading }] = useLoginUserMutation();
 
@@ -42,6 +45,7 @@ const LoginPage = () => {
           password: user.password,
           roles: user.roles,
         });
+        console.log("WWWWW",user2)
         const userCookie = await Cookies.get("userInfo");
         console.log(userCookie)
       }

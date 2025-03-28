@@ -5,6 +5,8 @@ import Header from "../components/Header";
 import Suggested from "../components/Suggested";
 import { useGetPostsQuery } from "../services/postApi";
 import { useEffect } from "react";
+import { RootState } from "../store";
+import { useSelector } from "react-redux";
 import io from "socket.io-client";
 
 const socket = io.connect("http://localhost:3001");
@@ -51,6 +53,7 @@ const mockSuggested = suggestedNames.map((name, index) => ({
 
 const Dashboard = () => {
   const { data } = useGetPostsQuery();
+  const user2 = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     console.log("✅ Dashboard component mounted");
@@ -58,6 +61,7 @@ const Dashboard = () => {
     socket.on("receive_message",(data:{message:string}) => {
       alert(data.message)
     })
+    console.log("UserDashboard",user2);
   }, []);
 
   return (

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import Cookies from "js-cookie";
 
 const messages= [
   { id: 1, senderId: 1, text: "Hey! How are you?"},
@@ -25,7 +26,23 @@ const currentUserId = 1;
 
 
 
+
 const Messaging = () => {
+
+  
+
+  useEffect(() => {
+    const userInfo = Cookies.get("userInfo");
+    console.log(userInfo);
+    if (userInfo) {
+      const parsedUser = JSON.parse(userInfo); // Parse JSON
+      console.log("whwhwhwhw",parsedUser.userid) 
+      return parsedUser.userid;
+      // Extract user ID
+    }
+    return null; // Return null if userInfo doesn't exist
+  })
+
   return (
     <div className='flex flex-col w-full justify-end flex-1 m-1'>
       <div className='flex flex-col justify-end'>
