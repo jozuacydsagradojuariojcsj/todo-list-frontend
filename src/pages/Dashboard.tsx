@@ -7,7 +7,7 @@ import { useGetPostsQuery } from "../services/postApi";
 import { useEffect } from "react";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
-import io from "socket.io-client";
+import * as io from "socket.io-client";
 
 const socket = io.connect("http://localhost:3001");
 

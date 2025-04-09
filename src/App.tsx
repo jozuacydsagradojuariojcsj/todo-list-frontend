@@ -8,7 +8,6 @@ import Messages from "./pages/Messages";
 function App() {
   return (
     <>
-      <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard2" element={<Dashboard />} />
@@ -17,9 +16,7 @@ function App() {
             <Route path="profile" element={<Profile/>} />
             <Route path="/message" element={<Messages/>}/>
           </Route>
-          
         </Routes>
-      </BrowserRouter>
     </>
   );
 }

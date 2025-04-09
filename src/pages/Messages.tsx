@@ -3,11 +3,8 @@ import Messaging from "../components/messsagesComponents/Messaging";
 
 const Messages = () => {
   return (
-    <div className="flex flex-col w-full overflow-y-scroll">
-      <div className="flex flex-row border border-yellow-500">
+    <div className="flex flex-col w-full overflow-y-scroll h-full">
         <Friends />
-        <Messaging />
-      </div>
     </div>
   );
 };
