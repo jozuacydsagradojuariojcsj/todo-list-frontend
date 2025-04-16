@@ -1,3 +1,7 @@
+import { useNavigate } from "react-router";
+
+
+
 const mockFriends = [
   'Alice',
   'Bob',
@@ -22,6 +26,9 @@ const mockFriends = [
 ];
 
 const Friends = () => {
+
+  const navigate = useNavigate();
+
   return (
     <>
     <div className='flex flex-col border border-black min-w-full flex-grow'>
@@ -40,7 +47,7 @@ const Friends = () => {
       <div className="flex-grow overflow-y-auto">
         <div className="flex flex-col divide-y divide-gray-200">
           {mockFriends.map((friend, index) => (
-            <div key={index} className="p-4">
+            <div onClick={() => navigate('/messaging')} key={index} className="p-4">
               {friend}
             </div>
           ))}

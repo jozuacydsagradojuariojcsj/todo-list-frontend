@@ -1,12 +1,13 @@
-import Friends from "../components/messsagesComponents/Friends";
-import Messaging from "../components/messsagesComponents/Messaging";
+import Messaging from '../components/messsagesComponents/Messaging'
 
 const Messages = () => {
   return (
-    <div className="flex flex-col w-full overflow-y-scroll h-full">
-        <Friends />
+    <div className='flex flex-col border border-red-500 w-full overflow-y-scroll'>
+        <div className="flex flex-row border border-yellow-500">
+            <Messaging />
+        </div>
     </div>
-  );
-};
+  )
+}
 
-export default Messages;
+export default Messages

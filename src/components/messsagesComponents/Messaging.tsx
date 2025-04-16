@@ -37,10 +37,7 @@ const Messaging = () => {
     if (userInfo) {
       const parsedUser = JSON.parse(userInfo); // Parse JSON
       console.log("whwhwhwhw",parsedUser.userid) 
-      return parsedUser.userid;
-      // Extract user ID
     }
-    return null; // Return null if userInfo doesn't exist
   })
 
   return (

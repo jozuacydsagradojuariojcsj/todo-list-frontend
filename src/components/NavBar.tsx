@@ -28,7 +28,7 @@ const NavBar = () => {
             key={item.id}
             onClick={() => {
               setActiveitem(item.id)
-              navigate(item.path,{replace:true})
+              navigate(item.path)
             }}
             className={`flex items-center gap-2 px-3 py-2 rounded-md transition-all ${
               activeItem === item.id
