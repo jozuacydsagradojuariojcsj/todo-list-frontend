@@ -4,7 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Layout from "./Layout";
 import Profile from "./pages/Profile";
 import Messages from "./pages/Messages";
-import MessageRouter from "./components/messsagesComponents/MessageRouter";
+import MessageFriendsList from "./pages/MessageFriendsList";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="profile" element={<Profile/>} />
-            <Route path="/message" element={<MessageRouter/>}/>
+            <Route path="/message" element={<MessageFriendsList/>}/>
             <Route path="/messaging" element={<Messages/>}/>
           </Route>
         </Routes>
