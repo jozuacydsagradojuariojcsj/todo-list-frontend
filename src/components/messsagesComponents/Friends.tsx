@@ -30,7 +30,7 @@ const Friends = () => {
   return (
     <>
       <div className="flex flex-col border border-black min-w-full flex-grow">
-        <div className="flex flex-row justify-between min-w-full min-h-[74px] border border-red-500  sticky top-0 z-10 bg-white lg:hidden">
+        <div className="flex flex-row justify-between min-w-full min-h-[74px] border border-red-500  sticky top-0 z-10 bg-white">
           <div>back</div>
           <div>name</div>
           <div>new message</div>

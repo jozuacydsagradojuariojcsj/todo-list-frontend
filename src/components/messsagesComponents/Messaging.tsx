@@ -35,7 +35,7 @@ const Messaging = () => {
   });
 
   return (
-    <div className="flex flex-col w-full justify-end flex-1 m-1">
+    <div className="flex flex-col flex-grow justify-center flex-1 m-1">
       <div className="flex flex-col justify-end">
         {messages && messages.length > 1 ? (
           messages.map((message) => (
