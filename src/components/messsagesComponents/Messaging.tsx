@@ -1,5 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { CreateMessage } from "../../types/messageType";
+import { getSocket } from "../../services/socket";
+
 
 const messages = [
   { id: 1, senderId: 1, text: "Hey! How are you?" },
@@ -25,7 +28,21 @@ const messages = [
 const currentUserId = 1;
 
 const Messaging = () => {
+
+  const socket = getSocket();
+  
+
+  const [messages, setMessages] = useState<CreateMessage[]>([]);
+
   useEffect(() => {
+    if (socket) {
+      socket.on("receive_message",(newMessage) => {
+        console.log("Receive New Message:", newMessage);
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
+      })
+    }
+
+    
     const userInfo = Cookies.get("userInfo");
     console.log(userInfo);
     if (userInfo) {

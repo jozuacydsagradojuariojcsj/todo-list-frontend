@@ -61,7 +61,7 @@ const NavBar = () => {
     return (
       <>
         <div className="hidden md:inline-block w-0.5 self-stretch bg-neutral-100 dark:bg-white/10" />
-        <div className="flex flex-row items-center justify-evenly position-sticky px-3 min-h-[48px] min-w-[50px] md:min-h-full xl:min-w-[220px] 2xl:min-w-[50px] md:flex-col md:items-start md:justify-start md:gap-y-0 md:py-20">
+        <div className="flex flex-row items-center justify-evenly position-sticky px-3 min-h-[48px] min-w-[100px] md:min-h-full md:flex-col md:items-start md:justify-start md:gap-y-0 md:py-20">
           {/* <Text className="hidden md:flex pl-3 font-cursive text-4xl" text="Instagram"/> */}
           {navItems.map((item) => (
             <button
