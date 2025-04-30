@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { CreateMessage } from "../../types/messageType";
+import { CreateMessage, GetMessage } from "../../types/messageType";
 import { getSocket } from "../../services/socket";
 
 
@@ -32,7 +32,7 @@ const Messaging = () => {
   const socket = getSocket();
   
 
-  const [messages, setMessages] = useState<CreateMessage[]>([]);
+  const [messages, setMessages] = useState<GetMessage[]>([]);
 
   useEffect(() => {
     if (socket) {
@@ -59,13 +59,13 @@ const Messaging = () => {
             <div
               key={message.id}
               className={`flex m-2 ${
-                message.senderId === currentUserId
+                message.sender_id === currentUserId
                   ? "justify-end"
                   : "justify-start"
               }`}
             >
               <div className="border border-blue-400 rounded-xl px-2">
-                {message.text}
+                {message.message}
               </div>
             </div>
           ))

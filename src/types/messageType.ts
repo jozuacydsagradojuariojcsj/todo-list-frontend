@@ -5,6 +5,15 @@ export interface CreateMessage{
     message:string;
 }
 
+export interface GetMessage{
+    id: number;
+    sender_id:number;
+    receiver_id:number;
+    chat_room_id:string;
+    message:string;
+}
+
+
 export interface SenderReceiverID{
     sender_id:number;
     receiver_id:number;
