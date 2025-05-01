@@ -7,7 +7,7 @@ export const messageApi = createApi({
         baseUrl: "http://localhost:3000/api/message/",
     }),
     endpoints:(builder) => ({
-        getMessage: builder.query<GetMessage[],void>({ query: () => "getmessage" }),
+        getMessage: builder.query<GetMessage[],{receiver_id:string}>({ query: (receiver_id) => `getmessage/${receiver_id}` }),
         createMessage: builder.mutation({
             query: (post) => ({
                 url: "/send",

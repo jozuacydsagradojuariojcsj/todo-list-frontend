@@ -13,7 +13,7 @@ export const store = configureStore({
         user: userSlice,
     },
     middleware: (getDefaultMiddleware) => 
-        getDefaultMiddleware().concat(userApi.middleware, postApi.middleware),
+        getDefaultMiddleware().concat(userApi.middleware, postApi.middleware, messageApi.middleware),
 });
 
 
