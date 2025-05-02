@@ -4,23 +4,20 @@ const mockFriends = [
   "Alice",
   "Bob",
   "Charlie",
-  "Diana",
-  "Eve",
-  "Frank",
-  "Grace",
-  "Hannah",
-  "Ivan",
-  "Judy",
-  "Kevin",
-  "Liam",
-  "Mona",
-  "Nate",
-  "Olivia",
-  "Paul",
-  "Quincy",
-  "Rachel",
-  "Steve",
-  "Tina",
+  "David",
+  "John",
+  "Wazzap",
+  "Mga",
+  "Bugo ",
+  "Naay",
+  "Sakit",
+  "Sa Utok",
+  "Ah",
+  "Samoka",
+  "Sad",
+  "Kayo",
+  "Ani",
+  "Oy",
 ];
 const ProfilePlaceholder = "/assets/profile.webp"
 
@@ -41,7 +38,7 @@ const Friends = () => {
             <div className="flex flex-col divide-y border border-black divide-gray-200">
               {mockFriends.map((friend, index) => (
                 <div
-                  onClick={() => navigate("/messaging",{state:{receiver_id: "5"}})}
+                  onClick={() => navigate("/messaging",{state:{receiver_id: index}})}
                   key={index}
                   className="p-4"
                 >

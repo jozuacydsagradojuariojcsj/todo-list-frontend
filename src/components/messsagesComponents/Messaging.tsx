@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
-import { CreateMessage, GetMessage } from "../../types/messageType";
+import { GetMessage } from "../../types/messageType";
 import { getSocket } from "../../services/socket";
 import { useGetMessageQuery } from "../../services/messageApi";
 import { useLocation } from "react-router"; 
@@ -27,61 +26,36 @@ import { useLocation } from "react-router";
 //   { id: 3, senderId: 1, text: "Just working on a project." },
 // ];
 
-const currentUserId = 1;
+const currentUserId = 21;
 
 const Messaging = () => {
 
   const socket = getSocket();
   const location = useLocation();
   const receiver_id = location.state?.receiver_id;
-  const {data: initialMessages=[], error: messageError, isLoading: messageIsLoading} = useGetMessageQuery(receiver_id);
+  const {data, error: messageError, isLoading: messageIsLoading} = useGetMessageQuery(receiver_id);
+  
   const [messages, setMessages] = useState<GetMessage[]>([]);
 
   useEffect(() => {
+    const initialMessages = data?.message || [];
     setMessages(initialMessages);
-  },[initialMessages])
-
-  // useEffect(() => {
-  //   if (socket) {
-  //     socket.on("receive_message",(newMessage) => {
-  //       console.log("Receive New Message:", newMessage);
-  //       setMessages((prevMessages) => [...prevMessages, newMessage]);
-  //     })
-  //   }
-  //   // const userInfo = Cookies.get("userInfo");
-  //   // console.log(userInfo);
-  //   // if (userInfo) {
-  //   //   const parsedUser = JSON.parse(userInfo); // Parse JSON
-  //   //   console.log("whwhwhwhw", parsedUser.userid);
-  //   // }
-  // });
-
-  // useEffect(() => {
-  //   setMessages((prev) => {
-  //     const isEqual =
-  //       prev.length === initialMessages.length &&
-  //       prev.every((msg, i) => msg.id === initialMessages[i]?.id); // or a better equality check
-  
-  //     return isEqual ? prev : initialMessages;
-  //   });
-  // }, [initialMessages]);
-  
+  },[data?.message])
 
   useEffect(() => {
-    setMessages((prev) => {
-      const isEqual =
-        prev.length === initialMessages.length &&
-        prev.every((msg, i) => msg.id === initialMessages[i]?.id); // or a better equality check
-  
-      return isEqual ? prev : initialMessages;
-    });
-  }, [initialMessages]);
-  
+    if (socket) {
+      socket.on("receive_message",(newMessage) => {
+        console.log("Receive New Message:", newMessage);
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
+      })
+    }
+  });
+
 
   return (
-    <div className="flex flex-col flex-grow justify-center flex-1 m-1">
-      <div className="flex flex-col justify-end">
-        {messages && messages.length > 1 ? (
+    <div className="flex flex-col flex-grow justify-end flex-1 m-1">
+      <div className="flex flex-col">
+        {messages && messages.length > 0 ? (
           messages.map((message) => (
             <div
               key={message.id}
@@ -97,7 +71,7 @@ const Messaging = () => {
             </div>
           ))
         ) : (
-          <div>asdasdasd</div>
+          <div className="flex-col">asdasdasd</div>
         )}
       </div>
       

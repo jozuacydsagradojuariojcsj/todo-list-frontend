@@ -5,9 +5,10 @@ export const messageApi = createApi({
     reducerPath: "messageApi",
     baseQuery: fetchBaseQuery({
         baseUrl: "http://localhost:3000/api/message/",
+        credentials:"include",
     }),
     endpoints:(builder) => ({
-        getMessage: builder.query<GetMessage[],{receiver_id:string}>({ query: (receiver_id) => `getmessage/${receiver_id}` }),
+        getMessage: builder.query<{message:GetMessage[]},void>({ query: (receiver_id) => `getmessage/${receiver_id}` }),
         createMessage: builder.mutation({
             query: (post) => ({
                 url: "/send",
