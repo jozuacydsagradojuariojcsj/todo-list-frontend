@@ -38,7 +38,7 @@ const Friends = () => {
             <div className="flex flex-col divide-y border border-black divide-gray-200">
               {mockFriends.map((friend, index) => (
                 <div
-                  onClick={() => navigate("/messaging",{state:{receiver_id: index}})}
+                  onClick={() => navigate("/messaging",{state:{receiver_id: index + 1 }})}
                   key={index}
                   className="p-4"
                 >
