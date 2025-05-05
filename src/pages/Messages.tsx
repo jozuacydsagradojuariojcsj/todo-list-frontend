@@ -15,15 +15,8 @@ const Messages = () => {
           </div>
           info
         </div>
-      
         <Messaging />
 
-        
-
-
-        <div className="flex flex-col sticky bottom-0 z-10 min-w-full px-2 min-h-[78px] justify-center items-center bg-white">
-          <input className="border border-yellow-500 w-full h-[44px] rounded-full px-5"></input>
-        </div>
       </div>
     </div>
   );

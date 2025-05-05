@@ -37,7 +37,6 @@ const LoginPage = () => {
 
       if (response.user) {
         const user = response.user;
-        console.log("User", user);
         Cookies.set("userInfo",JSON.stringify(user))
         setUserData({
           username: user.username,
