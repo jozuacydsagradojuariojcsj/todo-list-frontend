@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { GetMessage } from "../../types/messageType";
-import { getSocket } from "../../services/socket";
-import { useGetMessageQuery } from "../../services/messageApi";
+import { connectSocket, getSocket } from "../../services/socket";
+import {
+  useGetMessageQuery,
+  useCreateMessageMutation,
+} from "../../services/messageApi";
 import { useLocation } from "react-router";
 
 const currentUserId = 21;
 
 const Messaging = () => {
-  const socket = getSocket();
+  
   const location = useLocation();
   const receiver_id = location.state?.receiver_id;
   const {
@@ -15,16 +18,21 @@ const Messaging = () => {
     error: messageError,
     isLoading: messageIsLoading,
   } = useGetMessageQuery(receiver_id);
+  const [createMessage, { isLoading, error }] = useCreateMessageMutation();
 
   const [messages, setMessages] = useState<GetMessage[]>([]);
   const [receiverID, setReceiverID] = useState("");
   const [chatRoomID, setChatRoomID] = useState("");
-  const [newMessage, setNewMessage] = useState("");
+  const [sendNewMessage, setSendNewMessage] = useState("");
 
   useEffect(() => {
+    connectSocket();
+  },[])
+  
+  useEffect(() => {
     setMessages([]);
-    console.log("data?.message:",data?.message)
-
+    console.log("data?.message:", data?.message);
+    
     if (data != null) {
       const initialMessages = data?.message || [];
       const chat_room_id = data?.message?.[0]?.chat_room_id;
@@ -32,17 +40,37 @@ const Messaging = () => {
       setChatRoomID(chat_room_id);
       setMessages(initialMessages);
     }
-  }, [data?.message]);
+  }, [data?.message, receiver_id, data]);
 
   useEffect(() => {
-    console.log("setMessage:",messages)
+    const socket = getSocket();
+    console.log("setMessage:", messages);
+    console.log(socket)
     if (socket) {
       socket.on("receive_message", (newMessage) => {
         console.log("Receive New Message:", newMessage);
         setMessages((prevMessages) => [...prevMessages, newMessage]);
       });
+      socket.emit("join_room", chatRoomID);
+      if (data != null && chatRoomID) {
+        socket.emit("join_room", chatRoomID);
+        console.log("room join")
+      }
     }
   });
+
+  const handleSendNewMessage = async () => {
+    try {
+      const messagePayload = {
+        message: sendNewMessage,
+        receiver_id: receiverID,
+      };
+      const response = await createMessage(messagePayload).unwrap();
+      console.log("Message Sent successfully:", response);
+    } catch (err) {
+      console.log("Error sending message", err);
+    }
+  };
 
   return (
     <>
@@ -78,7 +106,13 @@ const Messaging = () => {
       </div>
 
       <div className="flex flex-col sticky bottom-0 z-10 min-w-full px-2 min-h-[78px] justify-center items-center bg-white">
-        <input className="border border-yellow-500 w-full h-[44px] rounded-full px-5" onChange={(e) => setNewMessage(e.target.value)}></input>
+        <div className="flex flex-row w-full border border-yellow-500 rounded-full h-[44px] px-5">
+          <input
+            className="flex flex-row border-none focus:outline-none w-full"
+            onChange={(e) => setSendNewMessage(e.target.value)}
+          />
+          <button className="border border-red-500" onClick={handleSendNewMessage}> Send</button>
+        </div>
       </div>
     </>
   );
