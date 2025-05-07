@@ -10,8 +10,8 @@ export const messageApi = createApi({
     endpoints:(builder) => ({
         getMessage: builder.query<{message:GetMessage[]},void>({ query: (receiver_id) => `getmessage/${receiver_id}` }),
         createMessage: builder.mutation({
-            query: (post) => ({
-                url: "/send",
+            query: ({post, chatRoomId}:{post:object; chatRoomId?:string}) => ({
+                url: chatRoomId ? `send/${chatRoomId}` : 'send',
                 method: "POST",
                 body: post,
             }),

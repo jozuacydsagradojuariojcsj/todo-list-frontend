@@ -44,20 +44,24 @@ const Messaging = () => {
 
   useEffect(() => {
     const socket = getSocket();
-    console.log("setMessage:", messages);
+    
     console.log(socket)
-    if (socket) {
-      socket.on("receive_message", (newMessage) => {
-        console.log("Receive New Message:", newMessage);
-        setMessages((prevMessages) => [...prevMessages, newMessage]);
-      });
+    if (socket && chatRoomID) {
       socket.emit("join_room", chatRoomID);
-      if (data != null && chatRoomID) {
-        socket.emit("join_room", chatRoomID);
-        console.log("room join")
-      }
+      console.log("room join",chatRoomID)
+
+      const handleReceiveMessages = (newMessage:GetMessage) => {
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
+        console.log("Receive New Messages:",newMessage);
+      };
+    
+      socket.on("receive_message", handleReceiveMessages);
+      return () => {
+        socket.off("receive_message", handleReceiveMessages);
+        console.log("Cleaned up socket listener");
+      };      
     }
-  });
+  },[chatRoomID]);
 
   const handleSendNewMessage = async () => {
     try {
@@ -65,7 +69,7 @@ const Messaging = () => {
         message: sendNewMessage,
         receiver_id: receiverID,
       };
-      const response = await createMessage(messagePayload).unwrap();
+      const response = await createMessage({post:messagePayload, chatRoomId:chatRoomID}).unwrap();
       console.log("Message Sent successfully:", response);
     } catch (err) {
       console.log("Error sending message", err);
