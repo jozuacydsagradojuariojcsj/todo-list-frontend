@@ -37,7 +37,6 @@ const LoginPage = () => {
 
       if (response.user) {
         const user = response.user;
-        Cookies.set("userInfo",JSON.stringify(user))
         setUserData({
           username: user.username,
           email: user.email,
@@ -45,8 +44,6 @@ const LoginPage = () => {
           roles: user.roles,
         });
         console.log("WWWWW",user2)
-        const userCookie = await Cookies.get("userInfo");
-        console.log(userCookie)
       }
 
       if (response.error) {

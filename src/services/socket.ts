@@ -4,7 +4,9 @@ let socket: Socket | null = null;
 
 export const connectSocket = () => {
   if (!socket) {
-    socket = io("http://localhost:3001");
+    socket = io("http://localhost:3001", {
+      withCredentials: true,
+    });
     console.log("User Connected");
   }
   console.log("User not connected")

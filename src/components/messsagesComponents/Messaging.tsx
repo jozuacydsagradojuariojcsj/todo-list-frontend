@@ -6,11 +6,14 @@ import {
   useCreateMessageMutation,
 } from "../../services/messageApi";
 import { useLocation } from "react-router";
+import { useSelector } from "react-redux"
+import { RootState } from "../../store";
+// const userInfo = Cookies.get("userInfo");
+// console.log(userInfo["userid"])
 
-const currentUserId = 21;
 
 const Messaging = () => {
-  
+  const user2 = useSelector((state: RootState) => state.user);
   const location = useLocation();
   const receiver_id = location.state?.receiver_id;
   const {
@@ -19,13 +22,14 @@ const Messaging = () => {
     isLoading: messageIsLoading,
   } = useGetMessageQuery(receiver_id);
   const [createMessage, { isLoading, error }] = useCreateMessageMutation();
-
+  const currentUserId = user2.userid;
   const [messages, setMessages] = useState<GetMessage[]>([]);
   const [receiverID, setReceiverID] = useState("");
   const [chatRoomID, setChatRoomID] = useState("");
   const [sendNewMessage, setSendNewMessage] = useState("");
 
   useEffect(() => {
+    console.log(user2);
     connectSocket();
   },[])
   

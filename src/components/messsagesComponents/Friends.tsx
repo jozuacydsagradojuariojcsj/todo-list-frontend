@@ -1,23 +1,26 @@
 import { useNavigate } from "react-router";
 
 const mockFriends = [
-  "Alice",
-  "Bob",
-  "Charlie",
-  "David",
-  "John",
-  "Wazzap",
-  "Mga",
-  "Bugo ",
-  "Naay",
-  "Sakit",
-  "Sa Utok",
-  "Ah",
-  "Samoka",
-  "Sad",
-  "Kayo",
-  "Ani",
-  "Oy",
+  {id:22, name:"Wwazza"},
+  {id:5, name:"JJuario"},
+  {id:21, name:"HelloWorld44"},
+  // "Alice",
+  // "Bob",
+  // "Charlie",
+  // "David",
+  // "John",
+  // "Wazzap",
+  // "Mga",
+  // "Bugo ",
+  // "Naay",
+  // "Sakit",
+  // "Sa Utok",
+  // "Ah",
+  // "Samoka",
+  // "Sad",
+  // "Kayo",
+  // "Ani",
+  // "Oy",
 ];
 const ProfilePlaceholder = "/assets/profile.webp"
 
@@ -38,14 +41,14 @@ const Friends = () => {
             <div className="flex flex-col divide-y border border-black divide-gray-200">
               {mockFriends.map((friend, index) => (
                 <div
-                  onClick={() => navigate("/messaging",{state:{receiver_id: index + 1 }})}
+                  onClick={() => navigate("/messaging",{state:{receiver_id: friend.id }})}
                   key={index}
                   className="p-4"
                 >
                   <span className="flex flex-row justify-start">
                     <img className="hidden lg:inline-block size-[44px] border border-blue-500 rounded-full object-cover" src={ProfilePlaceholder}></img>
                     <div className="flex flex-col px-2">
-                      {friend}
+                      {friend.name}
                       <div>last message</div>
                     </div>
                   </span>

@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
 import * as io from "socket.io-client";
-import Cookies from "js-cookie";
 
 const socket = io.connect("http://localhost:3001");
 
@@ -55,18 +54,15 @@ const mockSuggested = suggestedNames.map((name, index) => ({
 const Dashboard = () => {
   const { data } = useGetPostsQuery();
   const user2 = useSelector((state: RootState) => state.user);
-  const accessToken = Cookies.get("accessToken");
 
   useEffect(() => {
     console.log(data);
-    console.log("accessToken:",accessToken);
     console.log("✅ Dashboard component mounted");
     socket.emit("newStory",{message:"HEllo World"});
     socket.on("receive_message",(data:{message:string}) => {
       alert(data.message)
     })
     console.log("UserDashboard",user2);
-    console.log("accessToken:",accessToken);
   }, []);
 
   return (
