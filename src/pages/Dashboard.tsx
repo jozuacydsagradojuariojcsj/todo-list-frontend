@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
 import * as io from "socket.io-client";
+import { connectSocket, getSocket } from "../services/socket";
 
 const socket = io.connect("http://localhost:3001");
 
@@ -64,6 +65,16 @@ const Dashboard = () => {
     })
     console.log("UserDashboard",user2);
   }, []);
+
+  useEffect(() => {
+    connectSocket();
+
+    const socket = getSocket()
+
+    if(socket && user2) {
+      socket.emit("connected",user2);
+    }
+  },[])
 
   return (
     <>

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import { useLoginUserMutation } from "../services/userApi";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
-import Cookies from "js-cookie";
+
 
 const Google = "/assets/Google.svg";
 const Facebook = "/assets/Facebook.svg";
